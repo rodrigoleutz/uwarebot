@@ -8,6 +8,11 @@ Bot para telegram com funções básicas.
 
 https://t.me/joinchat/LLhzhBfQ6xP3jq-9RfBB-w
 
+ou
+
+https://t.me/bot_php_brasil
+
+
 - INSTALAÇÂO
 
 * Dica:
