@@ -22,14 +22,7 @@ Adicione o arquivo uwarebot.php e arquivos class no seu servidor nginx com https
 
 Entre nesta página com as devidas alterações.
 
-<<<<<<< HEAD
-
-
 https://api.telegram.org/bot--token--/setwebhook?url=https://--URL--/uwarebot.php
-
-=======
-https://api.telegram.org/bot^token^/setwebhook?url=https://^URL^/uwarebot.php
->>>>>>> quote
 
 O resultado será.
 
