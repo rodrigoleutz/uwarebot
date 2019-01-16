@@ -1,0 +1,11 @@
+#	@BotFather é o criador dos Bots
+
+-	Criando Bot
+
+/newbot
+
+-	Criando comandos
+
+/setcommands
+
+help - Comandos do uwareBot
