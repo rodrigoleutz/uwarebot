@@ -10,7 +10,10 @@ https://t.me/joinchat/LLhzhBfQ6xP3jq-9RfBB-w
 
 - INSTALAÇÂO
 
-Utiliza o @BotFather de exemplo para criação do Bot.
+* Dica:
+* https://www.vivaolinux.com.br/dica/Simple-Server-Monitor-Bot-Telegram-PHP/
+
+Utilize o @BotFather de exemplo para criação do Bot.
 
 Database use o arquivo database.sql como exemplo.
 
@@ -27,3 +30,6 @@ https://api.telegram.org/bot--token--/setwebhook?url=https://--URL--/uwarebot.ph
 O resultado será.
 
 {“ok”:true,”result”:true,”description”:”Webhook was set”}
+
+
+
