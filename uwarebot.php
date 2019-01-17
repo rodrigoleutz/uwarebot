@@ -46,8 +46,18 @@ $x=0;
 //	Comandos do dono
 if($update['message']['from']['id'] == OWNER){
 	if($text[0] == '/failssh'){
-		$msg = shell_exec("/usr/bin/sudo fail2ban-client status sshd");
+		$d = new DateTime();
+	    $d = $d->format("d-m-Y-H-i-s");
+		$log_name = "fail_log-".$d;
+		shell_exec("/usr/bin/sudo fail2ban-client status sshd > ".$log_name.".txt");
+		shell_exec("zip ".$log_name.".zip ".$log_name.".txt");
+		$msg = "O log ira em arquivo .zip nome: * ".$log_name.".zip *";
+		$sendto =API_URL."sendDocument?chat_id=".$chatID."&document=".BOT_URL.$log_name.".zip";
+		file_get_contents($sendto);
+		unlink($log_name.".txt");
+		unlink($log_name.".zip");
 		$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
+		$x=1;
 	}
 	else if($text[0] == '/free'){
 		$msg = shell_exec("free -m");
