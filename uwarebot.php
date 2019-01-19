@@ -196,9 +196,11 @@ else if($text[0] == '/post'){
 	}
 	else if($text[1] == 'list'){
 		$list = $post->postList();
+		$x = 1;
 		$msg = "*Posts:*";
 		foreach ($list as $key) {
-			$msg.= "\n".$key['url']." - ".$key['post']." -_ ".$key['owner']." _";
+			$msg.= "\n".$x.". ".$key['post']." - ".$key['url']." -_ ".$key['owner']." _";
+			$x++;
 		}
 		$x=1;
 	}
