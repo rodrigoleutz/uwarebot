@@ -1,0 +1,64 @@
+@font-face {
+     font-family: "Disney Heroic";
+     src: url('font/DisneyHeroic.ttf');
+}
+@keyframes fadein {
+  	from {
+    	opacity: 0;
+  	}
+	to {
+    	opacity: 1;
+  }
+}
+body{
+	animation-duration: 3s;
+  	animation-name: fadein;
+	font-family: "Disney Heroic";
+	background-image: radial-gradient(white 5%, darkgray 100%);
+}
+img{
+	width: 100vw;
+	max-width: 1000px;
+}
+.menu{
+	width: 100vw;
+	height: 20px;
+/*	background-color: rgb(60,60,60); */
+	background-image: url("../img/menu.png");
+	background-size: 100vw 20px;
+	background-repeat: no-repeat;
+}
+.menu a{
+	text-decoration: none;
+	color: white;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.menu a:hover{
+	color:black;
+	background-color: white;
+}
+.hits{
+	padding: 5px;
+	background-color: black;
+	color: white;
+	border: 1px solid black;
+	border-radius: 10px;
+}
+.git a{
+	padding: 5px;
+	text-decoration: none;
+	color: black;
+	border: 1px solid black;
+	border-radius: 5px;
+	transition: all 1s;
+}
+.git a:hover{
+	color: white;
+	background-color: black;
+	transition: all 1s;
+}
+.footer a{
+	text-decoration: none;
+	color: black;
+}

@@ -24,3 +24,12 @@ create table posts(
 );
 
 grant all privileges on uwarebot.posts to 'uwarebot'@'localhost';
+
+create table hits(
+	id int auto_increment not null,
+	data datetime not null,
+	ip varchar(50) not null,
+	primary key(id)
+);
+
+grant insert,select on uwarebot.hits to 'uwarebot'@'localhost';
