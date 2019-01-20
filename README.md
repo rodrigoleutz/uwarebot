@@ -18,15 +18,15 @@ https://t.me/bot_php_brasil
 * Dica:
 * https://www.vivaolinux.com.br/dica/Simple-Server-Monitor-Bot-Telegram-PHP/
 
-Utilize o @BotFather de exemplo para criação do Bot.
+Utilize o bot/@BotFather de exemplo para criação do Bot.
 
-Database use o arquivo database.sql como exemplo.
+Database use o arquivo sql/database.sql como exemplo.
 
 Adicione a seguinte linha no /etc/sudoers
 
 nginx   ALL=NOPASSWD: /bin/fail2ban-client status sshd , /bin/journalctl -u sshd --no-pager -n 20 , /bin/tail /var/log/nginx/error.log , /bin/tail /var/log/nginx/access.log  , /bin/top , /bin/ls , /bin/ping , /bin/whois
 
-Adicione o arquivo uwarebot.php e arquivos class no seu servidor nginx com https(a pasta precisa estar com permissão de escrita para o nginx).
+Adicione o arquivo bot/uwarebot.php e arquivos bot/class.* no seu servidor nginx com https(a pasta precisa estar com permissão de escrita para o nginx).
 
 Entre nesta página com as devidas alterações.
 
