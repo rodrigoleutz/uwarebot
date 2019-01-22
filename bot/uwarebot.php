@@ -24,17 +24,21 @@ define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
 
 //	Iniciando a class do Log
 $log = new Logs();
-
+$chat = new Chat();
 
 //	Variaveis
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
 $chatID = $update["message"]["chat"]["id"];
-$text_inteiro = $update['message']['text'];
+if(isset($update['message']['text'])&&!empty($update['message']['text'])){
+	$text_inteiro = $update['message']['text'];
+}
 $first_name = $update['message']['from']['first_name'];
-$last_name = $update['message']['from']['last_name'];
-$first_name = $first_name." ".$last_name;
-
+if(isset($update['message']['from']['last_name'])&&!empty($update['message']['from']['last_name'])){
+	$last_name = $update['message']['from']['last_name'];
+	$first_name = $first_name." ".$last_name;
+}
+$user_id = $update['message']['from']['id'];
 
 //	Programação do uwareBot
 
@@ -47,7 +51,7 @@ $x=0;
 if($update['message']['from']['id'] == OWNER){
 	if($text[0] == '/failssh'){
 		$d = new DateTime();
-	    $d = $d->format("d-m-Y-H-i-s");
+		$d = $d->format("d-m-Y-H-i-s");
 		$log_name = "fail_log-".$d;
 		shell_exec("/usr/bin/sudo fail2ban-client status sshd > ".$log_name.".txt");
 		shell_exec("zip ".$log_name.".zip ".$log_name.".txt");
@@ -71,7 +75,7 @@ if($update['message']['from']['id'] == OWNER){
 		$list = $log->showLog();
 		$msg = "id - Data - User_id - Name - Action";
 		foreach ($list as $key) {
-			$retorno = "\n".$key['id']." - ".$key['data']." - *".$key['user_id']."* - ".$key['name']." - ".$key['action'];
+			$retorno = "\n".$key['id']." - ".$key['data']." - ".$key['user_id']." - ".$key['name']." - ".$key['action'];
 			$msg.= $retorno;
 		}
 		$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
@@ -147,7 +151,28 @@ if($update['message']['from']['id'] == OWNER){
 
 
 //	Funções de todos os usuários
-if($text[0] == '/help' || $text[0] == '/help'.BOT_NAME){
+if(isset($update['message']['new_chat_members'])&&!empty($update['message']['new_chat_members'])){
+	$grupo = $update['message']['chat']['title'];
+	$msg = "Bem vindo* $first_name *ao grupo* $grupo *";
+	$msg.= "\nPara maiores informações digite: /help";
+	$msg.= "\n\nuwarebot - https://www.uware.com.br";
+	$x=1;
+	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
+}
+else if($chat->existText($text_inteiro)){
+	$resposta = $chat->respText($text_inteiro);
+	//$msg = "terra";
+	$msg = "$resposta";
+	$x=1;
+	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
+}
+else if($text[0]=='/chat'&&$text[1]=='add'){
+	$resposta = $chat->addText($text_inteiro);
+	$msg = "$resposta";
+	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
+	$x=1;
+}
+else if($text[0] == '/help' || $text[0] == '/help'.BOT_NAME){
 	$msg = "* Comandos do uwareBot:*\n\n";
 	if($update['message']['from']['id'] == OWNER){
 		$msg.= "/failssh - falhas no sshd do fail2ban\n";
@@ -186,6 +211,10 @@ else if($text[0] == '/oi'){
 	$msg = "oi $first_name, como vai?";
 	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
 }
+else if($text[0] == '/ping'){
+	$msg = shell_exec("/usr/bin/sudo ping $text[1] -c 4");
+	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
+}
 else if($text[0] == '/post'){
 	$post = new Posts();
 	if($text[1] == 'add'){
@@ -212,10 +241,6 @@ else if($text[0] == '/post'){
 	}
 	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
 }
-else if($text[0] == '/ping'){
-	$msg = shell_exec("/usr/bin/sudo ping $text[1] -c 4");
-	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
-}
 else if($text[0] == '/start'){
 	$msg = "Bem vindo ao uwareBot Server Monitor";
 	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
@@ -223,6 +248,9 @@ else if($text[0] == '/start'){
 else if($text[0] == '/whois'){
 	$msg = shell_exec("/usr/bin/sudo whois $text[1]");
 	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
+}
+else if($text[0] == 'bom' && $text[1] == 'dia'){
+	$msg = 'Bom dia loco';
 }
 
 /*	Escopo de função de qualquer um
@@ -232,13 +260,21 @@ if($text[0] == ''){
 }
 */
 
+// Testes
+//$msg = $update['message']['text'];
+/*$fp = fopen("test.txt","w");
+fwrite($fp, $update);
+file_put_contents("aruivo_teste_enter.txt", print_r($update, true));
+fclose($fp);*/
+
 // Envio para o servidor telegram
-if($x==1){
-	$sendto =API_URL."sendmessage?chat_id=".$chatID."&parse_mode=MARKDOWN&text=".urlencode($msg);
+if(isset($msg)&&!empty($msg)){
+	if($x==1){
+		$sendto =API_URL."sendmessage?chat_id=".$chatID."&parse_mode=MARKDOWN&text=".urlencode($msg);
+	}
+	else if($x==0){
+		$sendto =API_URL."sendmessage?chat_id=".$chatID."&text=".urlencode($msg);
+	}
+	file_get_contents($sendto);
 }
-else{
-	$sendto =API_URL."sendmessage?chat_id=".$chatID."&text=".urlencode($msg);
-}
-// parse_mode=MARKDOWN
-file_get_contents($sendto);
 ?>
