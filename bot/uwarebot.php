@@ -49,7 +49,19 @@ $x=0;
 
 //	Comandos do dono
 if($update['message']['from']['id'] == OWNER){
-	if($text[0] == '/failssh'){
+	if($text[0]=='/chat'){
+		if($text[1]=='add'){
+			$resposta = $chat->addText($text_inteiro);
+			$msg = "$resposta";
+		}
+		else if($text[1]=='del'){
+			$resposta = $chat->delText($text_inteiro);
+			$msg = "$resposta";
+		}
+		$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
+		$x=1;
+	}
+	else if($text[0] == '/failssh'){
 		$d = new DateTime();
 		$d = $d->format("d-m-Y-H-i-s");
 		$log_name = "fail_log-".$d;
@@ -151,6 +163,8 @@ if($update['message']['from']['id'] == OWNER){
 
 
 //	Funções de todos os usuários
+
+// Welcome msg
 if(isset($update['message']['new_chat_members'])&&!empty($update['message']['new_chat_members'])){
 	$grupo = $update['message']['chat']['title'];
 	$msg = "Bem vindo* $first_name *ao grupo* $grupo *";
@@ -159,22 +173,23 @@ if(isset($update['message']['new_chat_members'])&&!empty($update['message']['new
 	$x=1;
 	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
 }
-else if($chat->existText($text_inteiro)){
-	$resposta = $chat->respText($text_inteiro);
-	//$msg = "terra";
-	$msg = "$resposta";
+// Left msg
+else if(isset($update['message']['left_chat_member'])&&!empty($update['message']['left_chat_member'])){
+	$msg = "Se não aguenta* $first_name *não desce pro play.";
 	$x=1;
 	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
 }
-else if($text[0]=='/chat'&&$text[1]=='add'){
-	$resposta = $chat->addText($text_inteiro);
+// Teste de msg privada
+else if($chat->existText($text_inteiro)||$text[0]=='/'.BOT_NAME){
+	$resposta = $chat->respText($text_inteiro);
 	$msg = "$resposta";
-	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
 	$x=1;
+	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
 }
 else if($text[0] == '/help' || $text[0] == '/help'.BOT_NAME){
 	$msg = "* Comandos do uwareBot:*\n\n";
 	if($update['message']['from']['id'] == OWNER){
+		$msg.= "/chat - Opções do chatbot\n";
 		$msg.= "/failssh - falhas no sshd do fail2ban\n";
 		$msg.= "/free - Verifica memória\n";
 		$msg.= "/last - Ultimos 20 logins\n";
@@ -197,7 +212,7 @@ else if($text[0] == '/help' || $text[0] == '/help'.BOT_NAME){
 	$msg.= "/post - Posts feitos por usuários\n";
 	$msg.= "/start - Bem vindo\n";
 	$msg.= "/whois (url) - Whois do destino\n\n\n";
-	$msg.= "*GitHub: * https://github.com/rodrigoleutz/uwarebot  \n";
+	$msg.= "*uwarebot: * https://www.uware.com.br  \n";
 	$x=1;
 	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
 }
@@ -248,9 +263,6 @@ else if($text[0] == '/start'){
 else if($text[0] == '/whois'){
 	$msg = shell_exec("/usr/bin/sudo whois $text[1]");
 	$log->log($update['message']['from']['id'],$first_name,$text_inteiro);
-}
-else if($text[0] == 'bom' && $text[1] == 'dia'){
-	$msg = 'Bom dia loco';
 }
 
 /*	Escopo de função de qualquer um

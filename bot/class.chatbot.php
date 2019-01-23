@@ -41,6 +41,14 @@ class Chat{
       }
   	}
   }
+  public function delText($text){
+    if($this->existText()){
+
+    }
+    else{
+      
+    }
+  }
   public function existText($text){
     if(isset($text)&&!empty($text)){
       $text = "%".$text."%";

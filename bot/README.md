@@ -1,9 +1,9 @@
 #	uwarebot - Simple Server Monitor
 
--	Funções:
-	Logs do Servidor
-	Logs do bot
-	Posts de usuários
-	Chatbot - conversa privada
-	Welcomebot
+-	Funções:<br>
+	Logs do Servidor<br>
+	Logs do bot<br>
+	Posts de usuários<br>
+	Chatbot - conversa privada<br>
+	Welcomebot<br>
 	
