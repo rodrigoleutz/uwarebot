@@ -28,22 +28,16 @@ img{
 	background-size: 100vw 20px;
 	background-repeat: no-repeat;
 }
-.menu a{
-	text-decoration: none;
-	color: white;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-.menu a:hover{
-	color:black;
-	background-color: white;
-}
+
+
 .hits{
 	padding: 5px;
 	background-color: black;
 	color: white;
 	border: 1px solid black;
 	border-radius: 10px;
+	font-weight: bold;
+	cursor: default;
 }
 .git a{
 	padding: 5px;
@@ -58,7 +52,35 @@ img{
 	background-color: black;
 	transition: all 1s;
 }
+.down a{
+	padding: 5px;
+	text-decoration: none;
+	border: 1px solid black;
+	border-radius: 5px;
+	color: black;
+	transition: all 1s;
+	background-color: lightgreen;
+	padding: 5px;
+}
+.down a:hover{
+	color:white;
+	background-color: red;
+	transition: all 1s;
+}
 .footer a{
 	text-decoration: none;
 	color: black;
+}
+
+/* ChatBot da página */
+
+#chat{
+	right: 0;
+	bottom: -450px;
+	position: fixed;
+	width: 500px;
+	height: 500px;
+	background-color: rgb(0,0,0,0.6);
+	border-radius: 20px 0 0 0;
+	transition: bottom 3s;
 }

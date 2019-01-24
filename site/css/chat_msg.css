@@ -1,0 +1,28 @@
+body{
+  font-size: 20px;
+}
+.esq{
+  float: left;
+  background-color: white;
+  padding: 2px 4px;
+  border: 1px solid #666;
+  border-radius: 0 8px 0 0;
+  margin-top: 10px;
+  box-shadow: 3px 3px #666;
+  clear: both;
+}
+.dir{
+  float: right;
+  background-color: #ffff80;
+  padding: 2px 4px;
+  border: 1px solid #666;
+  border-radius: 0 8px 0 0;
+  margin-top: 10px;
+  box-shadow: 3px 3px #666;
+  clear: both;
+}
+.data{
+  font-size: 14px;
+  color: darkblue;
+  font-weight: bold;
+}
