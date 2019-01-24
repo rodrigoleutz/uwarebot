@@ -9,3 +9,4 @@
 /setcommands
 
 help - Comandos do uwareBot
+talk - Converse com o bot

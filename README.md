@@ -2,6 +2,8 @@
 <br><br><br>
 Simple Server Monitor Bot - Telegram
 
+Site: https://www.uware.com.br
+
 Bot para telegram com funções básicas.
 
 - Você não sabe seu id entre no grupo e digite /meuid

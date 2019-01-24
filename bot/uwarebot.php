@@ -11,9 +11,10 @@ if($_SERVER['REMOTE_ADDR']!='149.154.167.217'){
 	exit;
 }
 
-//	Classe de logs
+//	Classe de logs,posts e chatbot
 require "class.logs.php";
 require "class.posts.php";
+require "class.chatbot.php";
 
 //	Aqui é o token e id user do telegram
 define('BOT_TOKEN', '<token>');
